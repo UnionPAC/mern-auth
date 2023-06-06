@@ -1,8 +1,13 @@
+import { Helmet } from "react-helmet";
+
 const Register = () => {
   return (
-    <div>
+    <>
+      <Helmet>
+        <title>Auth | Register</title>
+      </Helmet>
       <p>Register</p>
-    </div>
+    </>
   );
 };
 

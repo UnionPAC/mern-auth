@@ -1,8 +1,13 @@
+import { Helmet } from "react-helmet";
+
 const Login = () => {
   return (
-    <div>
+    <>
+      <Helmet>
+        <title>Auth | Login</title>
+      </Helmet>
       <p>Login</p>
-    </div>
+    </>
   );
 };
 

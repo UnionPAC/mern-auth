@@ -1,7 +1,15 @@
 import Hero from "../components/Hero";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
-  return <Hero />;
+  return (
+    <>
+      <Helmet>
+        <title>Auth | Home</title>
+      </Helmet>
+      <Hero />
+    </>
+  );
 };
 
 export default Home;

@@ -1,10 +1,8 @@
-
-
 const Header = () => {
   return (
-    <header>
-      <div></div>
-    </header>
+    <div>
+      <p>Header</p>
+    </div>
   );
 };
 

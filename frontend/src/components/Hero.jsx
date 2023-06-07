@@ -5,7 +5,10 @@ const Hero = () => {
   return (
     <div className="py-5">
       <Container className="d-flex justify-content-center">
-        <Card className="p-5 w-50 d-flex flex-column align-items-center bg-light text-center">
+        <Card
+          className="p-5 d-flex flex-column align-items-center bg-light text-center"
+          style={{ maxWidth: "800px" }}
+        >
           <h1 className="mb-4">About this App</h1>
           <p className="mb-4">
             This is a boilerplate MERN authentication app that stores a JWT in

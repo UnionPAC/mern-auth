@@ -5,8 +5,6 @@ const generateToken = (res, userId) => {
     expiresIn: "30d",
   });
 
-  console.log(`Generated token: ${token}`);
-
   // https://expressjs.com/en/5x/api.html#res.cookie
   res.cookie("jwt", token, {
     httpOnly: true,

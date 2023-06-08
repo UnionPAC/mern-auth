@@ -13,6 +13,7 @@ import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Profile from "./pages/Profile.jsx";
+import PrivateRoute from "./components/PrivateRoute.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
@@ -22,7 +23,7 @@ const router = createBrowserRouter(
       <Route index={true} path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route>
+      <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<Profile />} />
       </Route>
     </Route>

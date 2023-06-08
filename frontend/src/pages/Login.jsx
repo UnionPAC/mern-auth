@@ -59,10 +59,11 @@ const Login = () => {
             <Form.Label className="fw-normal">Email address</Form.Label>
             <Form.Control
               type="email"
-              placeholder="Enter email"
+              placeholder="jdoe@gmail.com"
               value={loginInfo.email}
               name="email"
               onChange={handleChange}
+              style={{ fontSize: "14px" }}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="password">
@@ -73,6 +74,7 @@ const Login = () => {
               value={loginInfo.password}
               name="password"
               onChange={handleChange}
+              style={{ fontSize: "14px" }}
             />
           </Form.Group>
           <Button variant="primary" type="submit" className="mt-3">

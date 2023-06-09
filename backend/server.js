@@ -1,4 +1,5 @@
 import express from "express";
+import path from "path";
 import dotenv from "dotenv";
 dotenv.config();
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
@@ -24,9 +25,20 @@ app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 app.use("/api/users", userRoutes);
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+if (process.env.NODE_ENV === "production") {
+  const __dirname = path.resolve();
+
+  // Use our frontend static build
+  app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running and in deployment ...");
+  });
+}
 
 app.use(notFound);
 app.use(errorHandler);

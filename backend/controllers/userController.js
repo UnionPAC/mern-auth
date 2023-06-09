@@ -17,6 +17,7 @@ const authUser = asyncHandler(async (req, res) => {
       id: user._id,
       name: user.name,
       email: user.email,
+      profilePic: user.profilePic,
     });
   } else {
     res.status(401);
@@ -80,6 +81,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       id: user._id,
       name: user.name,
       email: user.email,
+      profilePic: user.profilePic,
     });
   } else {
     res.status(404);
@@ -99,6 +101,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
     if (req.body.password) {
       user.password = req.body.password;
+    }
+
+    if (req.body.profilePic) {
+      user.profilePic = req.body.profilePic || "";
     }
 
     const updatedUser = await user.save();

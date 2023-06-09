@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import { useUpdateUserMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
 import Loader from "../components/Loader";
+import { FaUserCircle } from "react-icons/fa";
+import encodeImagetoBase64 from "../utils/encodeImagetoBase64";
 
 const Profile = () => {
   const [profileInfo, setProfileInfo] = useState({
@@ -14,6 +16,7 @@ const Profile = () => {
     email: "",
     password: "",
     password2: "",
+    profilePic: "",
   });
 
   const [updateUserProfile, { isLoading }] = useUpdateUserMutation();
@@ -26,22 +29,36 @@ const Profile = () => {
     setProfileInfo({ ...profileInfo, [name]: value });
   };
 
+  const handleFileChange = (e) => {
+    setProfileInfo({
+      ...profileInfo,
+      profilePic: e.target.files[0],
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (profileInfo.password !== profileInfo.password2) {
       toast.error("Passwords don't match");
     } else {
       try {
+        let base64ImageString = "";
+        // Encode Image
+        if (profileInfo.profilePic) {
+          base64ImageString = await encodeImagetoBase64(profileInfo.profilePic);
+          // console.log(typeof base64ImageString);
+        }
         // update API
         const res = await updateUserProfile({
           id: userInfo._id,
           name: profileInfo.name,
           email: profileInfo.email,
           password: profileInfo.password,
+          profilePic: base64ImageString,
         }).unwrap();
         console.log(res);
         // setCredentials
-        dispatch(setCredentials(res));
+        dispatch(setCredentials({ ...res, profilePic: base64ImageString }));
         // notify success
         toast.success("Update success");
       } catch (error) {
@@ -58,6 +75,29 @@ const Profile = () => {
       <FormContainer>
         <Form onSubmit={handleSubmit}>
           <h1 className="mb-4">Update Profile</h1>
+          <div className="mb-4">
+            <Form.Label>
+              {userInfo.profilePic ? (
+                <img
+                  src={userInfo.profilePic}
+                  width={77}
+                  height={77}
+                  style={{
+                    borderRadius: "100px",
+                    objectFit: "cover",
+                  }}
+                />
+              ) : (
+                <FaUserCircle size={80} color="grey" />
+              )}
+            </Form.Label>
+            <Form.Control
+              type="file"
+              style={{ width: "250px", marginTop: "10px", fontSize: "12px" }}
+              name="profilePic"
+              onChange={handleFileChange}
+            />
+          </div>
           <div className="mb-4">
             <h5 style={{ fontSize: "18px", fontWeight: 500 }}>Name</h5>
             <p style={{ fontSize: "14px" }}>{userInfo.name}</p>

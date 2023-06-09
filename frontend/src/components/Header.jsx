@@ -44,10 +44,23 @@ const Header = () => {
                   <NavDropdown
                     title={
                       <div style={{ display: "inline-block" }}>
-                        <FaUserCircle
-                          size={25}
-                          style={{ marginRight: "8px" }}
-                        />
+                        {userInfo.profilePic ? (
+                          <img
+                            src={userInfo.profilePic}
+                            width={30}
+                            height={30}
+                            style={{
+                              marginRight: "8px",
+                              borderRadius: "100px",
+                              objectFit: "cover",
+                            }}
+                          />
+                        ) : (
+                          <FaUserCircle
+                            size={25}
+                            style={{ marginRight: "8px" }}
+                          />
+                        )}
 
                         {userInfo.name}
                       </div>

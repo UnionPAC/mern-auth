@@ -16,11 +16,11 @@ app.use(cookieParser());
 
 // adds middleware that parses incoming requests with JSON payloads
 // allows app to handle JSON data sent in the req.body
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
 
 // adds middleware that parses incoming requests with URL-encoded payloads
 // enables app to handle data sent in req.body using URL-encoded format
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 app.use("/api/users", userRoutes);
 

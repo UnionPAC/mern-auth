@@ -16,6 +16,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    profilePic: {
+      type: String,
+    },
   },
   // options
   // https://mongoosejs.com/docs/guide.html#options
